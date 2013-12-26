@@ -1,0 +1,123 @@
+<?php require dirname( __FILE__ ) . DIRECTORY_SEPARATOR . '_noncename.phtml'; ?>
+
+<?php $description = esc_html( $this->description ); ?>
+<?php $values      = $this->getValue( $this->id ); ?>
+
+<?php if( !is_array( $values ) ) $values   = array(); ?>
+<?php if( count( $values ) < 1 ) $values[] = ''; ?>
+
+<div id="repeater-<?php echo $this->id ?>">
+  <table style="margin-top:10px;width:100%;" class="repeater-content-wrapper-collection">
+    <?php if( $description <> '' ) : ?>
+      <tr>
+        <td colspan="6">
+          <p style="margin: 0 0 7px 0;">
+            <?php echo $description; ?>
+          </p>
+        </td>
+      </tr>
+    <?php endif;?>
+      
+    <?php $i = 0; foreach( $values as $value ) : ?>
+      <tr class="repeater-content-wrapper">
+        <td style="position: relative;">
+          <div style="margin-right:5px;margin-bottom:10px;">
+            <input placeholder="<?php _e( 'Thumb' ) ?>" class="upload-image url widefat thumb" type="text"   value="<?php echo $value[ 0 ] ?>" name="<?php echo $this->id ?>[<?php echo $i ?>][0]" />
+          </div>
+        </td>
+        
+        <td style="width:1px;">
+          <input style="margin-right:5px;margin-bottom:10px;" class="upload-image button" data-target="thumb" type="button" value="<?php _e( 'Select image' ) ?>" />
+        </td>
+        
+        <td style="position: relative;">
+          <div style="margin-right:5px;margin-bottom:10px;">
+            <input placeholder="<?php _e( 'Image' ) ?>" class="upload-image url widefat image" type="text"   value="<?php echo $value[ 1 ] ?>" name="<?php echo $this->id ?>[<?php echo $i ?>][1]" />
+          </div>
+        </td>
+        
+        <td style="width:1px;">
+          <input style="margin-right:5px;margin-bottom:10px;" class="upload-image button" data-target="image" type="button" value="<?php _e( 'Select image' ) ?>" />
+        </td>
+        
+        <td>
+          <div style="margin-right:5px;margin-bottom:10px;">
+            <input placeholder="<?php _e( 'Alternative text' ) ?>" class="upload-image alt widefat" type="text"   value="<?php echo $value[ 2 ] ?>" name="<?php echo $this->id ?>[<?php echo $i ?>][2]" />
+          </div>
+        </td>
+
+        <td style="width:1px;">
+          <input style="margin-bottom:10px;" class="repeater-button-remove button" type="button" value="–" />
+        </td>
+      </tr>
+    <?php $i++; endforeach;?>
+      
+    <tr class="repeater-add-wrapper">
+      <td colspan="5"></td>
+      <td style="width:1px;">
+        <input style="float:right;" id="repeater-<?php echo $this->id ?>-button-add" type="button" class="button-primary" value="+" />
+      </td>
+    </tr>
+  </table>
+</div>
+
+<script type="text/javascript">
+  ( function( $ )
+  {
+    $( '#repeater-<?php echo $this->id ?> .upload-image.button' ).click(
+      function()  
+      {
+        var
+        target = $( 'input.upload-image.url.' + $( this ).data( 'target' ), $( this ).parent().parent() ),
+        name   = target.attr( 'name' ),
+        wste   = window.send_to_editor;
+
+        tb_show( '', 'media-upload.php?type=image&TB_iframe=true' );
+
+        window.send_to_editor = function( html )
+        {
+          if( name != null )
+          {
+            target.val( $( 'img', html ).attr( 'src' ) );
+            tb_remove();
+            name = null;
+          }
+          else
+            wste( html );
+        };
+        return false;
+      });
+    
+    $( '#repeater-<?php echo $this->id ?> .repeater-button-remove' )
+      .click(
+        function()
+        {
+          $( this ).parent().parent().remove();
+        });
+
+    var
+    i          = <?php echo $i ?>,
+    collection = $( '#repeater-<?php echo $this->id ?> .repeater-content-wrapper-collection' ),
+    addTr      = $( '.repeater-add-wrapper', collection ),
+    wrapper    = $( '.repeater-content-wrapper', collection ).first().clone( true );
+
+    $( 'input.widefat', wrapper ).removeAttr( 'value' );
+    
+    $( '#repeater-<?php echo $this->id ?>-button-add' )
+      .click(
+        function()
+        {
+          i++;
+          
+          var clone = wrapper.clone( true );
+          
+          $( 'input.widefat', clone ).each(
+            function( n, input )
+            {
+              $( input ).attr( 'name', '<?php echo $this->id ?>[' + i + '][' + n + ']' );
+            });
+            
+          addTr.before( clone );
+        });
+  })( jQuery );
+</script>

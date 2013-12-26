@@ -1,0 +1,58 @@
+<?php require dirname( __FILE__ ) . DIRECTORY_SEPARATOR . '_noncename.phtml'; ?>
+
+<?php $description = esc_html( $this->description ); ?>
+
+<div id="media-<?php echo $this->id ?>">
+  <table style="margin-top:10px;width:100%;" class="content-wrapper-collection">
+    <?php if( $description <> '' ) : ?>
+      <tr>
+        <td colspan="5">
+          <p style="margin: 0 0 7px 0;">
+            <?php echo $description; ?>
+          </p>
+        </td>
+      </tr>
+    <?php endif;?>
+
+    <tr class="content-wrapper">
+      <td style="position: relative;">
+        <div style="margin-right:5px;margin-bottom:10px;">
+          <input placeholder="<?php _e( 'Media' ) ?>" class="upload-media url widefat media" type="text" value="<?php echo $this->getValue( $this->id ) ?>" name="<?php echo $this->id ?>" />
+        </div>
+      </td>
+
+      <td style="width:1px;">
+        <input style="margin-right:5px;margin-bottom:10px;" class="upload-media button" data-target="media" type="button" value="<?php _e( 'Select media' ) ?>" />
+      </td>
+    </tr>
+  </table>
+</div>
+
+<script type="text/javascript">
+  ( function( $ )
+  {
+    $( '#media-<?php echo $this->id ?> .upload-media.button' ).click(
+      function()  
+      {
+        var
+        target = $( 'input.upload-media.url.' + $( this ).data( 'target' ), $( this ).parent().parent() ),
+        name   = target.attr( 'name' ),
+        wste   = window.send_to_editor;
+
+        tb_show( '', 'media-upload.php?type=image&TB_iframe=true' );
+
+        window.send_to_editor = function( html )
+        {
+          if( name != null )
+          {
+            target.val( $(  html ).attr( 'href' ) );
+            tb_remove();
+            name = null;
+          }
+          else
+            wste( html );
+        };
+        return false;
+      });
+  })( jQuery );
+</script>

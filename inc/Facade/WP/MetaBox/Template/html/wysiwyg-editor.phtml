@@ -1,0 +1,30 @@
+<?php require dirname( __FILE__ ) . DIRECTORY_SEPARATOR . '_noncename.phtml'; ?>
+
+<?php $description = esc_html( $this->description ); ?>
+
+<?php if( $description <> '' ) : ?>
+  <p>
+    <?php echo $description; ?>
+  </p>
+<?php endif;?>
+
+<?php wp_editor( $this->getValue( $this->id ), $this->id ); ?>
+
+<script type="text/javascript">
+  ( function( $ )
+  {
+    $( '#<?php echo $this->id ?>' )
+      .css( 'display', 'none' );
+
+    $( '#post-body-content' ).append( 
+      $( '#wp-<?php echo $this->id ?>-wrap' )
+        .css( 'margin-bottom', '20px' ) );
+
+    $( document ).ready(
+      function()
+      {
+        $( '#adv-settings label[for="<?php echo $this->id ?>-hide"]' )
+          .css( 'display', 'none' );
+      });
+  })( jQuery );
+</script>
