@@ -5,6 +5,7 @@ session_start();
 // Cosmetics variable exchange
 define('DS', DIRECTORY_SEPARATOR);
 
+// Extended function collection
 require_once get_template_directory()
   .DS
   .'inc'
@@ -78,7 +79,7 @@ function init_script_enqueue()
     // Name
     'jquery',
     // Url
-    get_template_directory_uri() . '/js/jquery-1.10.2.min.js',
+    get_template_directory_uri().'/js/jquery-1.10.2.min.js',
     // Dependencies
     false,
     // Version
@@ -88,12 +89,39 @@ function init_script_enqueue()
 
   wp_register_script(
     'bootstrap',
-    get_template_directory_uri() . '/js/bootstrap-3.0.0.min.js',
+    get_template_directory_uri().'/js/bootstrap-3.0.0.min.js',
     array('jquery'),
     '3.0.0',
     true);
+
+  wp_register_script(
+    'shift',
+    get_template_directory_uri().'/js/shift.js',
+    array(),
+    '1.0.0',
+    true);
 }
 add_action('init', 'init_script_enqueue');
+
+// Enqueue style sheets
+function init_style_enqueue()
+{
+  if(is_admin())
+    return;
+
+  wp_enqueue_style(
+    // Name
+    'bootstrap',
+    // Url
+    get_template_directory_uri().'/css/bootstrap.min.css',
+    // Dependencies
+    array(),
+    // Version
+    '3.0.0',
+    // Media
+    'all');
+}
+add_action('init', 'init_style_enqueue');
 
 // RSS feed to header
 add_theme_support('automatic-feed-links');
@@ -175,7 +203,7 @@ add_filter('get_the_excerpt', 'init_excerpt_sufix');
 // Change the suffix
 function init_read_more($txt)
 {
-  return $txt.' <a href="'.get_permalink().'">' . __('Läs mer', 'BBO') . '..</a>';
+  return $txt.' <a href="'.get_permalink().'">'.__('Läs mer', 'BBO').'..</a>';
 }
 add_filter('read_more', 'init_read_more');
 
