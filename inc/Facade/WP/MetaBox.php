@@ -2,60 +2,64 @@
 
 class Facade_WP_MetaBox
 {
-  public 
+  public
     $id,
     $title,
     $type,
-    $template,
+    $pageTemplate,
+    $metaTemplate,
     $context,
     $priority;
 
-  protected function __construct( $id, $title, $description, $type, $template,
-          $context, $priority )
+  protected function __construct($id, $title, $description, $type,
+    $metaTemplate, $pageTemplate, $context, $priority)
   {
-    $template = implode(
-      '', 
+    $metaTemplate = implode(
+      '',
       array_map(
       'ucfirst',
       explode(
         '-',
-        $template )));
-    
+        $metaTemplate )));
+
     $this->title        = $title;
     $this->id           = sanitize_title( $id );
     $this->type         = $type;
     $this->description  = $description;
     $this->context      = $context;
+    $this->pageTemplate = $pageTemplate;
     $this->priority     = $priority;
-    
-    if( class_exists( $template ))
-      $this->template = new $template( $this->id, $description );
-    
-    if( !( $this->template instanceof Facade_WP_MetaBox_Template ))
+
+    if( class_exists( $metaTemplate ))
+      $this->metaTemplate = new $metaTemplate( $this->id, $description );
+
+    if( !( $this->metaTemplate instanceof Facade_WP_MetaBox_Template ))
     {
-      $this->template = 'Facade_WP_MetaBox_Template_' . $template;
-      $this->template = new $this->template( $this->id, $description );
+      $this->metaTemplate = 'Facade_WP_MetaBox_Template_' . $metaTemplate;
+      $this->metaTemplate = new $this->metaTemplate( $this->id, $description );
     }
   }
 
-  public static function add( $id, $title, $description = '', $type = 'post', 
-          $template = 'simple', $context = 'normal', $priority = 'high' )
+  public static function add($id, $title, $description = '', $type = 'post',
+    $metaTemplate = 'simple', $pageTemplate = 'any', $context = 'normal',
+    $priority = 'high')
   {
     $instance = new self(
       $id,
       $title,
       $description,
       $type,
-      $template,
-      $context, 
+      $metaTemplate,
+      $pageTemplate,
+      $context,
       $priority );
-    
+
     add_action(
       'add_meta_boxes',
       array(
         $instance,
         'addMetaBox' ));
-    
+
     add_action(
       'save_post',
       array(
@@ -64,36 +68,41 @@ class Facade_WP_MetaBox
       1,
       0);
   }
-  
+
   public static function get( $key, $post = null )
   {
     if( $post === null )
       global $post;
-    
+
     $data = get_post_meta(
       is_object( $post )
         ? $post->ID
         : (int) $post,
-      sanitize_title( $key ), 
+      sanitize_title( $key ),
       true );
 
     if( is_serialized( $data ) )
       $data = unserialize( $data );
-    
+
     return $data;
   }
 
   public function addMetaBox()
   {
-    add_meta_box(
-      $this->id,
-      $this->title,
-      array( $this->template, 'getHtml'),
-      $this->type,
-      $this->context,
-      $this->priority );
+    $templates = get_page_templates();
+    $template  = get_page_template_slug();
+
+    if($this->pageTemplate == 'any'
+    || $templates[$this->pageTemplate] == $template)
+      add_meta_box(
+        $this->id,
+        $this->title,
+        array($this->metaTemplate, 'getHtml'),
+        $this->type,
+        $this->context,
+        $this->priority );
   }
-  
+
   public function saveMetaBox()
   {
     global $post;
@@ -109,11 +118,11 @@ class Facade_WP_MetaBox
     // Prohibits saving data twice
     if( $post->post_type == 'revision' )
       return $post->ID;
-    
-    foreach( $this->template->getKeys() as $key )
+
+    foreach( $this->metaTemplate->getKeys() as $key )
     {
       $value = $_POST[ $key ];
-      
+
       // If the value is defined as an array then serialize it
       $value = is_array( $value )
         ? serialize( $value )
