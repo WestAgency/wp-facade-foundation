@@ -75,11 +75,11 @@ function init_script_enqueue()
 
   wp_deregister_script('jquery');
 
-  wp_register_script(
+  wp_enqueue_script(
     // Name
     'jquery',
     // Url
-    get_template_directory_uri().'/js/jquery-1.10.2.min.js',
+    get_template_directory_uri().'/js/jquery.min.js',
     // Dependencies
     false,
     // Version
@@ -87,14 +87,14 @@ function init_script_enqueue()
     // Footer
     true);
 
-  wp_register_script(
+  wp_enqueue_script(
     'bootstrap',
-    get_template_directory_uri().'/js/bootstrap-3.0.0.min.js',
+    get_template_directory_uri().'/js/bootstrap.min.js',
     array('jquery'),
     '3.0.0',
     true);
 
-  wp_register_script(
+  wp_enqueue_script(
     'shift',
     get_template_directory_uri().'/js/shift.js',
     array(),
