@@ -1,4 +1,5 @@
-@import url('css/bootstrap.css');
+@import url('css/bootstrap.min.css');
+@import url('css/master.css');
 
 html,
 body
@@ -9,5 +10,5 @@ body
 
 .mceContentBody
 {
-  
+
 }
