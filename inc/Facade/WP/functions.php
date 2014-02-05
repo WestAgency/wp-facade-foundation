@@ -8,10 +8,10 @@ function get_flash_messages( $namespace = '' )
 function get_the_meta_value( $key, $post = null, $content_filter = false )
 {
   $value = Facade_WP_MetaBox::get( $key, $post );
-  
+
   if( $content_filter )
     $value = the_content_filter( $value );
-  
+
   return $value;
 }
 
@@ -24,6 +24,14 @@ function the_content_filter( $content )
 {
   $content = apply_filters( 'the_content', $content );
   $content = str_replace( ']]>', ']]&gt;', $content );
-  
+
   return $content;
+}
+
+function get_dynamic_sidebar($index = 1)
+{
+  ob_start();
+  dynamic_sidebar($index);
+  $sidebar_contents = ob_get_clean();
+  return $sidebar_contents;
 }
