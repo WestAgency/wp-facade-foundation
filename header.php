@@ -4,5 +4,5 @@
     <?php get_header('head') ?>
   </head>
 
-  <body>
+  <body <?php body_class() ?>>
     <?php get_header('nav') ?>
