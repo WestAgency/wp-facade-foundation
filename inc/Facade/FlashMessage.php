@@ -5,7 +5,7 @@ class Facade_FlashMessage
   /**
    * Returns if there is any messages
    * @param String $namespace [optional]
-   * @return Boolean 
+   * @return Boolean
    */
   public static function hasMessages( $namespace = '' )
   {
@@ -25,8 +25,22 @@ class Facade_FlashMessage
   }
 
   /**
+   * Returns an array of namespaces in use
+   * @return Array
+   */
+  public static function getNamespaces()
+  {
+    self::_compose();
+
+    $namespaces = array_keys($_SESSION[ 'FlashMessage' ][ 'ns' ]);
+    array_push($namespaces, '');
+
+    return $namespaces;
+  }
+
+  /**
    * @param String $namespace [optional]
-   * @return Array 
+   * @return Array
    */
   public static function getMessages( $namespace = '' )
   {
@@ -56,7 +70,7 @@ class Facade_FlashMessage
 
   /**
    * @param String $namespace [optional]
-   * @return Array 
+   * @return Array
    */
   public static function getAllMessages()
   {
@@ -68,9 +82,9 @@ class Facade_FlashMessage
     return $messages;
   }
 
-  /** 
+  /**
    * Composes the hierarki
-   * @param String $namespace 
+   * @param String $namespace
    */
   protected static function _compose( $namespace = '' )
   {
