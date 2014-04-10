@@ -17,7 +17,7 @@ require_once get_template_directory()
   .'functions.php';
 
 // Include classes
-function __autoload($class_name)
+spl_autoload_register(function($class_name)
 {
   $file = get_template_directory()
     .DS
@@ -32,7 +32,7 @@ function __autoload($class_name)
 
   if(is_file($file))
     include_once $file;
-}
+});
 
 // Handles certain post data
 Facade_Form::mapper(
