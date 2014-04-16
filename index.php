@@ -1,9 +1,3 @@
-<?php get_header() ?>
+<?php
 
-<?php get_header('masthead') ?>
-
-<?php get_header('nav') ?>
-
-
-
-<?php get_footer() ?>
+require __DIR__ . '/404.php';

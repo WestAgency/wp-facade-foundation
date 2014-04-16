@@ -9,5 +9,3 @@
         'fallback_cb'    => false ))
   ?>
 </nav>
-
-<?php  get_header('flash') ?>

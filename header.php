@@ -6,3 +6,5 @@
 
   <body <?php body_class() ?>>
     <?php get_header('nav') ?>
+
+    <?php get_header('flash') ?>
