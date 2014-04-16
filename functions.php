@@ -123,7 +123,7 @@ function init_style_enqueue()
 
   wp_enqueue_style(
     // Name
-    'bootstrap',
+    'master',
     // Url
     get_template_directory_uri().'/css/master.css',
     // Dependencies
