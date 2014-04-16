@@ -120,6 +120,18 @@ function init_style_enqueue()
     '3.0.0',
     // Media
     'all');
+
+  wp_enqueue_style(
+    // Name
+    'bootstrap',
+    // Url
+    get_template_directory_uri().'/css/master.css',
+    // Dependencies
+    array('bootstrap'),
+    // Version
+    '1.0.0',
+    // Media
+    'all');
 }
 add_action('init', 'init_style_enqueue');
 
