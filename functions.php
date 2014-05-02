@@ -60,6 +60,30 @@ function init_meta_boxes()
 }
 add_action('init', 'init_meta_boxes');
 
+// Hides the editor for process template
+function hide_editor()
+{
+  // Get the Post ID.
+  $post_id = $_GET['post']
+           ? $_GET['post']
+           : $_POST['post_ID'];
+
+  if(!isset($post_id))
+    return;
+
+  // Get the name of the Page Template file.
+  $template_file = get_post_meta($post_id, '_wp_page_template', true);
+
+  switch ($template_file)
+  {
+    // add correct template file name
+    case '?.php':
+      remove_post_type_support('page', 'editor');
+      break;
+  }
+}
+add_action('admin_init', 'hide_editor');
+
 // Register sidebars | widgets
 function init_dynamic_sidebars()
 {
