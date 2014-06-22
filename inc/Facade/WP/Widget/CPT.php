@@ -60,7 +60,7 @@ abstract class Facade_WP_Widget_CPT extends WP_Widget
     {
       echo '<select class="widefat" id="' . $this->get_field_id($this->getCpt()) . '" name="' . $this->get_field_name($this->getCpt()) . '">';
       foreach($posts as $post)
-        echo '<option value="' . $post->ID . '"' . selected($post->ID, $instance['employee'], false) . '>' . $post->post_title . '</option>';
+        echo '<option value="' . $post->ID . '"' . selected($post->ID, $instance[$this->getCpt()], false) . '>' . $post->post_title . '</option>';
       echo '</select>';
     }
     else
