@@ -35,3 +35,11 @@ function get_dynamic_sidebar($index = 1)
   $sidebar_contents = ob_get_clean();
   return $sidebar_contents;
 }
+
+function get_the_post_thumbnail_src($id = null)
+{
+  global $post;
+  $id  = is_null($id) ? $post->ID : $id;
+  $url = wp_get_attachment_url( get_post_thumbnail_id( $id ) );
+  return $url;
+}
