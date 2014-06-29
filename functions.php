@@ -42,7 +42,7 @@ Facade_Form::mapper(
 // Register menus
 function init_custome_menu()
 {
-  register_nav_menu('menu-main', __('Huvud meny', 'BBO'));
+  register_nav_menu('menu-main', __('Huvudmeny'));
 }
 add_action('init', 'init_custome_menu');
 
@@ -239,7 +239,7 @@ add_filter('get_the_excerpt', 'init_excerpt_sufix');
 // Change the suffix
 function init_read_more($txt)
 {
-  return $txt.' <a href="'.get_permalink().'">'.__('Läs mer', 'BBO').'..</a>';
+  return $txt.' <a href="'.get_permalink().'">'.__('Läs mer').'..</a>';
 }
 add_filter('read_more', 'init_read_more');
 
