@@ -5,3 +5,20 @@ input
 {
   -webkit-font-smoothing: antialiased;
 }
+
+a,
+.btn-link
+{
+  -webkit-transition: color 0.4s;
+     -moz-transition: color 0.4s;
+       -o-transition: color 0.4s;
+          transition: color 0.4s;
+}
+
+.btn-link:hover,
+.btn-link:focus,
+a:hover,
+a:focus
+{
+  text-decoration: none;
+}
