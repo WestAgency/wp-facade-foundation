@@ -1,0 +1,49 @@
+<?php require dirname( __FILE__ ) . DIRECTORY_SEPARATOR . '_noncename.phtml'; ?>
+
+<?php $description = $this->description; ?>
+
+<?php if( $description <> '' ) : ?>
+  <p style="margin-bottom:5px;">
+    <?php echo $description; ?>
+  </p>
+<?php endif ?>
+
+<?php
+ global $wpdb;
+
+ $composed = array();
+ $querystr = "
+    SELECT DISTINCT post_type
+    FROM $wpdb->posts
+    WHERE $wpdb->posts.post_type != 'attachment'
+      AND $wpdb->posts.post_type != 'nav_menu_item'
+      AND $wpdb->posts.post_type != 'post'
+      AND $wpdb->posts.post_type != 'page'
+      AND $wpdb->posts.post_type != 'revision'
+    ORDER BY $wpdb->posts.post_type
+ ";
+
+ foreach ($wpdb->get_results($querystr, OBJECT) as $post) :
+    $querystr = "
+      SELECT ID, post_title
+      FROM $wpdb->posts
+      WHERE $wpdb->posts.post_type = '$post->post_type'
+      ORDER BY $wpdb->posts.post_title
+    ";
+
+    $composed[$post->post_type] = $wpdb->get_results($querystr, OBJECT);
+  endforeach;
+
+?>
+
+<select name="<?php echo $this->id ?>">
+  <?php foreach ($composed as $cpt => $posts): ?>
+    <optgroup label="<?php echo $cpt ?>">
+      <?php foreach ($posts as $post): ?>
+        <option value="<?php echo $post->ID ?>"<?php echo $this->getValue( $this->id ) == $post->ID ? ' selected' : '' ?>>
+          <?php echo $post->post_title ?>
+        </option>
+      <?php endforeach ?>
+    </optgroup>
+  <?php endforeach; ?>
+</select>
