@@ -1,0 +1,17 @@
+<?php $description = esc_html( $this->description ); ?>
+<?php $values      = $this->getValue( $this->id ); ?>
+
+<?php if( !is_array( $values ) ) $values   = array(); ?>
+<?php if( count( $values ) < 1 ) $values[] = ''; ?>
+
+<?php if($description) : ?>
+  <h3><?php echo $description ?></h3>
+<?php endif ?>
+
+<?php foreach( $values as $value ) : if( !$value ) continue ?>
+  <hr />
+
+  <p><?php echo nl2br( $value ) ?></p>
+  <?php //print_r($value ); ?>
+<?php endforeach;?>
+
