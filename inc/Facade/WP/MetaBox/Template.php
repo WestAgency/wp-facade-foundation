@@ -11,29 +11,26 @@ abstract class Facade_WP_MetaBox_Template
   {
     $this->id          = $id;
     $this->description = $description;
-    $this->_path       = dirname( __FILE__ ) 
-                       . DIRECTORY_SEPARATOR 
+    $this->_path       = dirname( __FILE__ )
+                       . DIRECTORY_SEPARATOR
                        . 'Template' ;
   }
-  
+
   public function getHtml()
   {
-    $filter   = new Facade_Filter_CamelToDashed();
-    $ds       = DIRECTORY_SEPARATOR;
-    $template = $filter->filter(
-      array_pop(
-        explode(
-          '_', 
-          get_class( $this ))));
-    
-    require $this->_path 
-      . $ds 
-      . 'html' 
-      . $ds 
-      . $template 
+    $filter    = new Facade_Filter_CamelToDashed();
+    $ds        = DIRECTORY_SEPARATOR;
+    $exploaded = explode('_', get_class( $this ));
+    $template  = $filter->filter(array_pop($exploaded));
+
+    require $this->_path
+      . $ds
+      . 'html'
+      . $ds
+      . $template
       . '.phtml';
   }
-  
+
   protected function getValue( $key )
   {
     return Facade_WP_MetaBox::get( $key );
