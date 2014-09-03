@@ -9,9 +9,21 @@
 <?php endif ?>
 
 <?php foreach( $values as $value ) : if( !$value ) continue ?>
-  <hr />
+  <?php if(is_array($value)): ?>
+    <table class="widefat fixed" cellspacing="0" style="border:0px; margin-bottom: 25px;">
+      <?php foreach($value as $key => $innerVal) : ?>
+        <tr>
+          <td style="border-bottom:1px solid #eee"><?php echo $key ?></td>
+          <td style="border-bottom:1px solid #eee"><?php echo nl2br( $innerVal ) ?></td>
+        </tr>
+      <?php endforeach ?>
+    </table>
+  <?php else: ?>
+    <?php if($i++ > 0) : ?>
+      <hr />
+    <?php endif ?>
 
-  <p><?php echo nl2br( $value ) ?></p>
+    <p><?php echo nl2br( $value ) ?></p>
+  <?php endif ?>
   <?php //print_r($value ); ?>
-<?php endforeach;?>
-
+<?php endforeach ?>
