@@ -39,9 +39,10 @@ spl_autoload_register(function($class_name)
 });
 
 // Handles certain post data
-Facade_Form::mapper(
-  array(),
-  $_POST['ns']);
+if(isset($_POST['ns']))
+  Facade_Form::mapper(
+    array(),
+    $_POST['ns']);
 
 // Register menus
 function init_custome_menu()
@@ -68,11 +69,13 @@ add_action('init', 'init_meta_boxes');
 function hide_editor()
 {
   // Get the Post ID.
-  $post_id = $_GET['post']
-           ? $_GET['post']
-           : $_POST['post_ID'];
+  if(isset($_GET['post']))
+    $post_id = $_GET['post'];
 
-  if(!isset($post_id))
+  else if(isset($_POST['post_ID']))
+    $post_id = $_POST['post_ID'];
+
+  else
     return;
 
   // Get the name of the Page Template file.
