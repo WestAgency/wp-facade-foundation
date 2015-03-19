@@ -9,10 +9,11 @@ class Facade_WP_MetaBox
     $pageTemplate,
     $metaTemplate,
     $context,
-    $priority;
+    $priority,
+    $args;
 
   protected function __construct($id, $title, $description, $type,
-    $metaTemplate, $pageTemplate, $context, $priority)
+    $metaTemplate, $pageTemplate, $context, $priority,$args)
   {
     $metaTemplate = implode(
       '',
@@ -29,30 +30,38 @@ class Facade_WP_MetaBox
     $this->context      = $context;
     $this->pageTemplate = $pageTemplate;
     $this->priority     = $priority;
+    $this->args         = $args;
 
     if( class_exists( $metaTemplate ))
-      $this->metaTemplate = new $metaTemplate( $this->id, $description );
+      $this->metaTemplate = new $metaTemplate( $this->id, $description, $args );
 
     if( !( $this->metaTemplate instanceof Facade_WP_MetaBox_Template ))
     {
       $this->metaTemplate = 'Facade_WP_MetaBox_Template_' . $metaTemplate;
-      $this->metaTemplate = new $this->metaTemplate( $this->id, $description );
+      $this->metaTemplate = new $this->metaTemplate( $this->id, $description, $args );
     }
   }
 
-  public static function add($id, $title, $description = '', $type = 'post',
+  public static function add($id, $title, $description = '', $types = 'post',
     $metaTemplate = 'simple', $pageTemplate = 'any', $context = 'normal',
-    $priority = 'high')
+    $priority = 'high',$args=array())
   {
-    $instance = new self(
-      $id,
-      $title,
-      $description,
-      $type,
-      $metaTemplate,
-      $pageTemplate,
-      $context,
-      $priority );
+    if(!is_array($types))
+      $types = array($types);
+
+    //Loop to allow multiple posttypes
+    foreach ($types as $key => $type)
+    {
+      $instance = new self(
+        $id,
+        $title,
+        $description,
+        $type,
+        $metaTemplate,
+        $pageTemplate,
+        $context,
+        $priority,
+        $args);
 
     add_action(
       'add_meta_boxes',
@@ -67,6 +76,7 @@ class Facade_WP_MetaBox
         'saveMetaBox' ),
       1,
       0);
+    }
   }
 
   public static function get( $key, $post = null )
@@ -100,7 +110,7 @@ class Facade_WP_MetaBox
         array($this->metaTemplate, 'getHtml'),
         $this->type,
         $this->context,
-        $this->priority );
+        $this->priority);
   }
 
   public function saveMetaBox()
@@ -108,7 +118,8 @@ class Facade_WP_MetaBox
     global $post;
 
     // Verify noncename
-    if ( !wp_verify_nonce( $_POST[ 'noncename-' . $this->id ], $this->id ))
+    if ( !isset($_POST[ 'noncename-' . $this->id ])
+      || !wp_verify_nonce( $_POST[ 'noncename-' . $this->id ], $this->id ))
       return $post->ID;
 
     // Authorized?
@@ -122,11 +133,6 @@ class Facade_WP_MetaBox
     foreach( $this->metaTemplate->getKeys() as $key )
     {
       $value = $_POST[ $key ];
-
-      // If the value is defined as an array then serialize it
-      $value = is_array( $value )
-        ? serialize( $value )
-        : trim( $value );
 
       // If empty field, no storage is needed
       if( empty( $value ))
