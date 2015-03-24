@@ -7,6 +7,10 @@ define('DS', DIRECTORY_SEPARATOR);
 require_once get_template_directory()
   .DS.'inc'.DS.'functions.bootstrap.php';
 
+// Meta
+require_once get_template_directory()
+  .DS.'inc'.DS.'functions.app-meta.php';
+
 // Custome post types
 require_once get_template_directory()
   .DS.'inc'.DS.'functions.cpt.php';
@@ -30,7 +34,3 @@ require_once get_template_directory()
 // Editor
 require_once get_template_directory()
   .DS.'inc'.DS.'functions.editor.php';
-
-// Meta
-require_once get_template_directory()
-  .DS.'inc'.DS.'functions.meta.php';
