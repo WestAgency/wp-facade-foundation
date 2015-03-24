@@ -17,14 +17,14 @@
   </head>
 
   <body {{ function('body_class') }}>
-    <nav class="clearfix" id="main-menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+    <menu class="clearfix" itemscope itemtype="http://schema.org/SiteNavigationElement">
       {{ function('wp_nav_menu', {
               'theme_location' : 'menu-main',
               'container'      : false,
               'items_wrap'     : '<ul class="%2$s">%3$s</ul>',
               'menu_class'     : 'container',
               'fallback_cb'    : false}) }}
-    </nav>
+    </menu>
 
     {{ function('get_template_part', 'flash-messages') }}
 
