@@ -1,0 +1,70 @@
+<?php require dirname( __FILE__ ) . DIRECTORY_SEPARATOR . '_noncename.phtml'; ?>
+
+<?php $description = esc_html( $this->description ); ?>
+
+<div id="dubbel-image-<?php echo $this->id ?>">
+  <table style="margin-top:10px;width:100%;" class="content-wrapper-collection">
+    <?php if( $description <> '' ) : ?>
+      <tr>
+        <td colspan="5">
+          <p style="margin: 0 0 7px 0;">
+            <?php echo $description; ?>
+          </p>
+        </td>
+      </tr>
+    <?php endif;?>
+
+    <tr class="content-wrapper">
+      <td style="position: relative;">
+        <div style="margin-right:5px;margin-bottom:10px;">
+          <input placeholder="<?php _e( 'Image' ) ?>" class="upload-image url widefat image" type="text" value="<?php echo $this->getValue( $this->id . '-image' ) ?>" name="<?php echo $this->id . '-image' ?>" />
+        </div>
+      </td>
+
+      <td style="width:1px;">
+        <input style="margin-right:5px;margin-bottom:10px;" class="upload-image button" data-target="image" type="button" value="<?php _e( 'Select image' ) ?>" />
+      </td>
+
+      <td>
+        <div style="margin-right:5px;margin-bottom:10px;">
+          <input placeholder="<?php _e( 'Alternative text' ) ?>" class="upload-image alt widefat" type="text" value="<?php echo $this->getValue( $this->id . '-alt' ) ?>" name="<?php echo $this->id . '-alt' ?>" />
+        </div>
+      </td>
+
+      <td>
+        <div style="margin-right:5px;margin-bottom:10px;">
+          <input placeholder="<?php _e( 'Caption' ) ?>" class="upload-image alt widefat" type="text" value="<?php echo $this->getValue( $this->id . '-caption' ) ?>" name="<?php echo $this->id . '-caption' ?>" />
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<script type="text/javascript">
+  ( function( $ )
+  {
+    $( '#dubbel-image-<?php echo $this->id ?> .upload-image.button' ).click(
+      function()
+      {
+        var
+        target = $( 'input.upload-image.url.' + $( this ).data( 'target' ), $( this ).parent().parent() ),
+        name   = target.attr( 'name' ),
+        wste   = window.send_to_editor;
+
+        tb_show( '', 'media-upload.php?type=image&TB_iframe=true' );
+
+        window.send_to_editor = function( html )
+        {
+          if( name != null )
+          {
+            target.val( $( 'img', html ).attr( 'src' ) );
+            tb_remove();
+            name = null;
+          }
+          else
+            wste( html );
+        };
+        return false;
+      });
+  })( jQuery );
+</script>
