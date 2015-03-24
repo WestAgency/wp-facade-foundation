@@ -1,3 +1,3 @@
-<?php get_header() ?>
+<?php
 
-<?php get_footer() ?>
+Timber::render('page.twig');

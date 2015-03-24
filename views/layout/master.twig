@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html {{ function('language_attributes') }}>
+  <head>
+    {% block head %}
+      <meta charset="<?php bloginfo('charset') ?>">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>{% block title %}{% endblock %}</title>
+
+      <!--link type="image/x-icon" rel="shortcut icon" href="<?php bloginfo('template_directory') ?>/img/favicon.ico"-->
+
+      <!--[if lt IE 9]>
+        <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+
+      {{ function('wp_head') }}
+    {% endblock %}
+  </head>
+
+  <body {{ function('body_class') }}>
+    <nav class="clearfix" id="main-menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
+      {{ function('wp_nav_menu', {
+              'theme_location' : 'menu-main',
+              'container'      : false,
+              'items_wrap'     : '<ul class="%2$s">%3$s</ul>',
+              'menu_class'     : 'container',
+              'fallback_cb'    : false}) }}
+    </nav>
+
+    {{ function('get_template_part', 'flashMessages') }}
+
+    {% block content %}
+    {% endblock %}
+
+    {% block footer %}
+    {% endblock %}
+
+    {{ function('wp_footer') }}
+  </body>
+</html>

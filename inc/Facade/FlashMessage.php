@@ -7,16 +7,16 @@ class Facade_FlashMessage
    * @param String $namespace [optional]
    * @return Boolean
    */
-  public static function hasMessages( $namespace = '' )
+  public function hasMessages( $namespace = '' )
   {
-    return count( self::_getMessages( $namespace )) > 0;
+    return count( $this->_getMessages( $namespace )) > 0;
   }
 
   /**
    * @param String $message
    * @param String $namespace [optional]
    */
-  public static function addMessage( $message, $namespace = '' )
+  public function addMessage( $message, $namespace = '' )
   {
     if( strlen( $message ) > 0 )
       strlen( $namespace ) > 0
@@ -28,9 +28,9 @@ class Facade_FlashMessage
    * Returns an array of namespaces in use
    * @return Array
    */
-  public static function getNamespaces()
+  public function getNamespaces()
   {
-    self::_compose();
+    $this->_compose();
 
     $namespaces = array_keys($_SESSION[ 'FlashMessage' ][ 'ns' ]);
     array_push($namespaces, '');
@@ -42,9 +42,9 @@ class Facade_FlashMessage
    * @param String $namespace [optional]
    * @return Array
    */
-  public static function getMessages( $namespace = '' )
+  public function getMessages( $namespace = '' )
   {
-    $messages = self::_getMessages( $namespace );
+    $messages = $this->_getMessages( $namespace );
 
     if( strlen( $namespace ) > 0 )
       unset( $_SESSION[ 'FlashMessage' ][ 'ns' ][ $namespace ] );
@@ -59,9 +59,9 @@ class Facade_FlashMessage
    * @param String $namespace [optional]
    * @return Array
    */
-  protected static function _getMessages( $namespace = '' )
+  protected function _getMessages( $namespace = '' )
   {
-    self::_compose( $namespace );
+    $this->_compose( $namespace );
 
     return strlen( $namespace ) > 0
       ? $_SESSION[ 'FlashMessage' ][ 'ns' ][ $namespace ]
@@ -72,9 +72,9 @@ class Facade_FlashMessage
    * @param String $namespace [optional]
    * @return Array
    */
-  public static function getAllMessages()
+  public function getAllMessages()
   {
-    self::_compose();
+    $this->_compose();
 
     $messages = $_SESSION[ 'FlashMessage' ];
     unset( $_SESSION[ 'FlashMessage' ] );
@@ -86,7 +86,7 @@ class Facade_FlashMessage
    * Composes the hierarki
    * @param String $namespace
    */
-  protected static function _compose( $namespace = '' )
+  protected function _compose( $namespace = '' )
   {
     if( !isset( $_SESSION[ 'FlashMessage' ] ))
       $_SESSION[ 'FlashMessage' ] = array();
