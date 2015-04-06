@@ -41,9 +41,9 @@ function remove_menus()
   global $menu;
   $remove =
   [
-    __('Posts',    'west'),
-    __('Comments', 'west'),
-    __('Links',    'west')
+    __('Posts'),
+    __('Comments'),
+    __('Links')
   ];
   foreach($menu as $key => $value)
   {
