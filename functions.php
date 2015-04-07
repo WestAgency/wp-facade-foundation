@@ -10,6 +10,9 @@ require_once $inc.'functions.bootstrap.php';
 // Meta
 require_once $inc.'functions.app-meta.php';
 
+// Menu
+require_once $inc.'functions.menu.php';
+
 // Custome post types
 require_once $inc.'functions.cpt.php';
 
