@@ -43,3 +43,14 @@ function get_the_post_thumbnail_src($id = null)
   $url = wp_get_attachment_url( get_post_thumbnail_id( $id ) );
   return $url;
 }
+
+/**
+ * @param string $key The global key to access
+ * @param string $lang [optional] Specify a language or let it fallback
+ * @return String
+ */
+function get_global($key, $lang = null)
+{
+  $lang = $lang ?: (ICL_LANGUAGE_CODE ?: '');
+  return get_option('facade_' . $key . '_' . $lang);
+}

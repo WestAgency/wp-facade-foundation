@@ -1,0 +1,50 @@
+<div class="wrap">
+  <h2 class="nav-tab-wrapper">
+    {% for item in function('icl_get_languages', 'skip_missing=0&orderby=custom') ?: [] %}
+      <a class='nav-tab{% if currentTab == item.language_code %} nav-tab-active{% endif %}' href='?page=west_global-segment&tab={{ item.language_code }}'>{{ item.translated_name }}</a>
+    {% endfor %}
+  </h2>
+
+  <h2>{{ __('Globala segment', 'west') }}</h2>
+
+  <form method='post' enctype='multipart/form-data'>
+    {{ function('wp_nonce_field', 'west-global-segment') }}
+
+    <button type='submit' class="button-primary pull-right">
+      {{ __('Spara', 'west') }}
+    </button>
+
+    <table class="form-table">
+      {# Header #}
+      <tr>
+        <th scope="row" colspan="2">
+          <hr>
+
+          <h3>
+            {{ __('Foo', 'west') }}
+          </h3>
+        </th>
+      </tr>
+
+      <tr valign="top">
+        <th scope="row">
+          <label for="num_elements">
+            {{ __('Foobar', 'west') }}:
+          </label>
+        </th>
+
+        <td>
+          <input type="text" class="widefat" name="foobar_{{ currentTab }}" value="{{ function('get_global', 'foobar', currentTab) | stripslashes | esc_attr }}" />
+        </td>
+      </tr>
+    </table>
+
+    <br>
+    <hr>
+    <br>
+
+    <button type='submit' class="button-primary">
+      {{ __('Spara', 'west') }}
+    </button>
+  </form>
+</div>

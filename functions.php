@@ -25,6 +25,9 @@ require_once $inc.'functions.style-sheets.php';
 // Meta boxes
 require_once $inc.'functions.meta-boxes.php';
 
+// Options
+require_once $inc.'functions.options-page.php';
+
 // Widgets
 require_once $inc.'functions.widget.php';
 
