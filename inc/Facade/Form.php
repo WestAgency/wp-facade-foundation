@@ -5,22 +5,22 @@ abstract class Facade_Form implements Facade_Form_Interface
   protected
    /**
     * Validation rules
-    * 
-    * @var Array 
+    *
+    * @var Array
     */
     $_rules = array(),
-          
+
    /**
     * What keys to filter
-    * 
-    * @var Array 
+    *
+    * @var Array
     */
     $_filter = array(),
-          
+
    /**
     * Validation rules
-    * 
-    * @var Array 
+    *
+    * @var Array
     */
     $_data = array();
 
@@ -34,14 +34,14 @@ abstract class Facade_Form implements Facade_Form_Interface
   }
 
   /**
-   * Good for setting validation rules and filter keys or other what ever 
+   * Good for setting validation rules and filter keys or other what ever
    */
   protected function _init() {}
-  
+
  /**
   * Composes the data.
-  * 
-  * @throws Facade_Form_Exception 
+  *
+  * @throws Facade_Form_Exception
   */
   protected function _composeData()
   {
@@ -50,7 +50,7 @@ abstract class Facade_Form implements Facade_Form_Interface
       {
         if( !is_array( $this->_filter[ $key ] ) )
           $this->_filter[ $key ] = array( $this->_filter[ $key ] );
-        
+
         foreach( $this->_filter[ $key ] as $filter )
         {
           try
@@ -60,12 +60,12 @@ abstract class Facade_Form implements Facade_Form_Interface
             if( !( $filter instanceof Facade_Filter_Interface ))
               throw new Exception();
           }
-          catch( Exception $exc ) 
+          catch( Exception $exc )
           {
             throw new Facade_Form_Exception(
               'Unrecognized filter: "' . $rule . '"' );
           }
-          
+
           $this->_data[ $key ] = $filter->filter( $value );
         }
       }
@@ -75,8 +75,8 @@ abstract class Facade_Form implements Facade_Form_Interface
 
  /**
   * Validates the data.
-  * 
-  * @throws Facade_Form_Exception 
+  *
+  * @throws Facade_Form_Exception
   */
   protected function _validateData()
   {
@@ -84,26 +84,26 @@ abstract class Facade_Form implements Facade_Form_Interface
     {
       if( !is_array( $rules ) )
         $rules = array( $rules );
-      
+
       foreach( $rules as $rule )
       {
         try
         {
           $rule = new $rule();
-          
+
           if( !( $rule instanceof Facade_Validator_Interface ))
             throw new Exception();
         }
-        catch( Exception $exc ) 
+        catch( Exception $exc )
         {
           throw new Facade_Form_Exception(
             'Unrecognized validation rule: "' . $rule . '"' );
         }
-        
+
         $data = isset( $this->_data[ $key ] )
               ? $this->_data[ $key ]
               : null;
-        
+
         if( !$rule->validate( $data ))
           throw new Facade_Form_Exception(
             'Invalid data for: "' . $key . '", rule: "' . get_class ( $rule ) . '"' );
@@ -111,12 +111,12 @@ abstract class Facade_Form implements Facade_Form_Interface
     }
   }
 
-  public static function mapper( $map, $namespace )
+  public static function mapper($handler)
   {
-    if( !isset( $map[ $namespace ] ))
+    if(class_exists($handler))
       return false;
-    
-    $form = new $map[ $namespace ]();
+
+    $form = new $handler();
 
     try
     {
@@ -125,19 +125,19 @@ abstract class Facade_Form implements Facade_Form_Interface
     }
     catch( Facade_Form_Exception $e )
     {
-      $form->onInvalidation( $e->getMessage() ); 
+      $form->onInvalidation( $e->getMessage() );
     }
-    
+
     $form->validated();
-    
+
     return true;
   }
-  
+
   public function onInvalidation( $message = '' )
   {
     if( $message !== '' )
       Facade_FlashMessage::addMessage( $message, 'error' );
-    
+
     Facade_Request::reload();
   }
 }

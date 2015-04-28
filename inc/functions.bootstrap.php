@@ -31,6 +31,4 @@ spl_autoload_register(function($class_name)
 
 // Handles certain post data
 if(isset($_POST['ns']))
-  Facade_Form::mapper(
-    array(),
-    $_POST['ns']);
+  Facade_Form::mapper($_POST['ns']);
