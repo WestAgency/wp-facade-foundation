@@ -124,11 +124,6 @@ class Facade_WP_MetaBox
       $value = $_POST[ $key ];
 
       // If the value is defined as an array then serialize it
-      $value = is_array( $value )
-        ? serialize( $value )
-        : trim( $value );
-
-      // If empty field, no storage is needed
       if( empty( $value ))
       {
         delete_post_meta( $post->ID, $key );
