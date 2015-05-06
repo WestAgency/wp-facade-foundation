@@ -17,7 +17,7 @@
     <tr class="content-wrapper">
       <td style="position: relative;">
         <div style="margin-right:5px;margin-bottom:10px;">
-          <input placeholder="<?php _e( 'Bild' ) ?>" class="upload-image url widefat image" type="text" value="<?php echo $this->getValue( $this->id ) ?>" name="<?php echo $this->id ?>" />
+          <input placeholder="<?php _e( 'Bild' ) ?>" class="upload-image url widefat image" type="text" value="<?php echo esc_attr($this->getValue( $this->id )) ?>" name="<?php echo $this->id ?>" />
         </div>
       </td>
 

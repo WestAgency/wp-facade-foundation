@@ -8,4 +8,4 @@
   </p>
 <?php endif;?>
 
-<input style="font-size:1.7em;" type="text" name="<?php echo $this->id ?>" value="<?php echo $this->getValue( $this->id ) ?>" class="widefat" />
+<input style="font-size:1.7em;" type="text" name="<?php echo $this->id ?>" value="<?php echo esc_attr($this->getValue( $this->id )) ?>" class="widefat" />

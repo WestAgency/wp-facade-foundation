@@ -17,7 +17,7 @@
     <tr class="content-wrapper">
       <td style="position: relative;">
         <div style="margin-right:5px;margin-bottom:10px;">
-          <input placeholder="<?php _e( 'Media' ) ?>" class="upload-media url widefat media" type="text" value="<?php echo $this->getValue( $this->id ) ?>" name="<?php echo $this->id ?>" />
+          <input placeholder="<?php _e( 'Media' ) ?>" class="upload-media url widefat media" type="text" value="<?php echo esc_attr($this->getValue( $this->id )) ?>" name="<?php echo $this->id ?>" />
         </div>
       </td>
 
@@ -32,7 +32,7 @@
   ( function( $ )
   {
     $( '#media-<?php echo $this->id ?> .upload-media.button' ).click(
-      function()  
+      function()
       {
         var
         target = $( 'input.upload-media.url.' + $( this ).data( 'target' ), $( this ).parent().parent() ),

@@ -17,7 +17,7 @@
     <tr class="content-wrapper">
       <td style="position: relative;">
         <div style="margin-right:5px;margin-bottom:10px;">
-          <input placeholder="<?php _e( 'Thumb' ) ?>" class="upload-image url widefat thumb" type="text" value="<?php echo $this->getValue( $this->id . '-thumb' ) ?>" name="<?php echo $this->id . '-thumb' ?>" />
+          <input placeholder="<?php _e( 'Thumb' ) ?>" class="upload-image url widefat thumb" type="text" value="<?php echo esc_attr($this->getValue( $this->id . '-thumb' )) ?>" name="<?php echo $this->id . '-thumb' ?>" />
         </div>
       </td>
 
@@ -27,7 +27,7 @@
 
       <td style="position: relative;">
         <div style="margin-right:5px;margin-bottom:10px;">
-          <input placeholder="<?php _e( 'Image' ) ?>" class="upload-image url widefat image" type="text" value="<?php echo $this->getValue( $this->id . '-image' ) ?>" name="<?php echo $this->id . '-image' ?>" />
+          <input placeholder="<?php _e( 'Image' ) ?>" class="upload-image url widefat image" type="text" value="<?php echo esc_attr($this->getValue( $this->id . '-image' )) ?>" name="<?php echo $this->id . '-image' ?>" />
         </div>
       </td>
 
@@ -37,7 +37,7 @@
 
       <td>
         <div style="margin-right:5px;margin-bottom:10px;">
-          <input placeholder="<?php _e( 'Alternative text' ) ?>" class="upload-image alt widefat" type="text"   value="<?php echo $this->getValue( $this->id . '-alt' ) ?>" name="<?php echo $this->id . '-alt' ?>" />
+          <input placeholder="<?php _e( 'Alternative text' ) ?>" class="upload-image alt widefat" type="text"   value="<?php echo esc_attr($this->getValue( $this->id . '-alt' )) ?>" name="<?php echo $this->id . '-alt' ?>" />
         </div>
       </td>
     </tr>
@@ -48,7 +48,7 @@
   ( function( $ )
   {
     $( '#dubbel-image-<?php echo $this->id ?> .upload-image.button' ).click(
-      function()  
+      function()
       {
         var
         target = $( 'input.upload-image.url.' + $( this ).data( 'target' ), $( this ).parent().parent() ),

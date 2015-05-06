@@ -17,12 +17,12 @@
         </td>
       </tr>
     <?php endif;?>
-      
+
     <?php foreach( $values as $value ) : ?>
       <tr class="repeater-content-wrapper">
         <td>
           <div style="margin-right:5px;margin-bottom:10px;">
-            <input type="text" name="<?php echo $this->id ?>[]" value="<?php echo $value ?>" class="widefat" />
+            <input type="text" name="<?php echo $this->id ?>[]" value="<?php echo esc_attr($value) ?>" class="widefat" />
           </div>
         </td>
 
@@ -31,7 +31,7 @@
         </td>
       </tr>
     <?php endforeach;?>
-      
+
     <tr class="repeater-add-wrapper">
       <td></td>
       <td style="width:1px;">
@@ -57,7 +57,7 @@
     wrapper    = $( '.repeater-content-wrapper', collection ).first().clone( true );
 
     $( 'input.widefat', wrapper ).removeAttr( 'value' );
-    
+
     $( '#repeater-<?php echo $this->id ?>-button-add' )
       .click(
         function()

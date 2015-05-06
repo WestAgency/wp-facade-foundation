@@ -22,19 +22,19 @@
       <tr class="repeater-content-wrapper">
         <td>
           <div style="margin-right:5px;margin-bottom:10px;">
-            <input type="text" name="<?php echo $this->id ?>[<?php echo $i ?>][0]" value="<?php echo $value[0] ?>" class="widefat" />
+            <input type="text" name="<?php echo $this->id ?>[<?php echo $i ?>][0]" value="<?php echo esc_attr($value[0]) ?>" class="widefat" />
           </div>
         </td>
 
         <td>
           <div style="margin-left:5px;margin-right:5px;margin-bottom:10px;">
-            <input type="text" name="<?php echo $this->id ?>[<?php echo $i ?>][1]" value="<?php echo $value[1] ?>" class="widefat" />
+            <input type="text" name="<?php echo $this->id ?>[<?php echo $i ?>][1]" value="<?php echo esc_attr($value[1]) ?>" class="widefat" />
           </div>
         </td>
 
         <td>
           <div style="margin-left:5px;margin-right:5px;margin-bottom:10px;">
-            <input type="text" name="<?php echo $this->id ?>[<?php echo $i ?>][2]" value="<?php echo $value[2] ?>" class="widefat" />
+            <input type="text" name="<?php echo $this->id ?>[<?php echo $i ?>][2]" value="<?php echo esc_attr($value[2]) ?>" class="widefat" />
           </div>
         </td>
 

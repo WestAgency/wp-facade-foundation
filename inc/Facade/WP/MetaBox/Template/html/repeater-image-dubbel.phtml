@@ -17,32 +17,32 @@
         </td>
       </tr>
     <?php endif;?>
-      
+
     <?php $i = 0; foreach( $values as $value ) : ?>
       <tr class="repeater-content-wrapper">
         <td style="position: relative;">
           <div style="margin-right:5px;margin-bottom:10px;">
-            <input placeholder="<?php _e( 'Thumb' ) ?>" class="upload-image url widefat thumb" type="text"   value="<?php echo $value[ 0 ] ?>" name="<?php echo $this->id ?>[<?php echo $i ?>][0]" />
+            <input placeholder="<?php _e( 'Thumb' ) ?>" class="upload-image url widefat thumb" type="text"   value="<?php echo esc_attr($value[ 0 ]) ?>" name="<?php echo $this->id ?>[<?php echo $i ?>][0]" />
           </div>
         </td>
-        
+
         <td style="width:1px;">
           <input style="margin-right:5px;margin-bottom:10px;" class="upload-image button" data-target="thumb" type="button" value="<?php _e( 'Select image' ) ?>" />
         </td>
-        
+
         <td style="position: relative;">
           <div style="margin-right:5px;margin-bottom:10px;">
-            <input placeholder="<?php _e( 'Image' ) ?>" class="upload-image url widefat image" type="text"   value="<?php echo $value[ 1 ] ?>" name="<?php echo $this->id ?>[<?php echo $i ?>][1]" />
+            <input placeholder="<?php _e( 'Image' ) ?>" class="upload-image url widefat image" type="text"   value="<?php echo esc_attr($value[ 1 ]) ?>" name="<?php echo $this->id ?>[<?php echo $i ?>][1]" />
           </div>
         </td>
-        
+
         <td style="width:1px;">
           <input style="margin-right:5px;margin-bottom:10px;" class="upload-image button" data-target="image" type="button" value="<?php _e( 'Select image' ) ?>" />
         </td>
-        
+
         <td>
           <div style="margin-right:5px;margin-bottom:10px;">
-            <input placeholder="<?php _e( 'Alternative text' ) ?>" class="upload-image alt widefat" type="text"   value="<?php echo $value[ 2 ] ?>" name="<?php echo $this->id ?>[<?php echo $i ?>][2]" />
+            <input placeholder="<?php _e( 'Alternative text' ) ?>" class="upload-image alt widefat" type="text"   value="<?php echo esc_attr($value[ 2 ]) ?>" name="<?php echo $this->id ?>[<?php echo $i ?>][2]" />
           </div>
         </td>
 
@@ -51,7 +51,7 @@
         </td>
       </tr>
     <?php $i++; endforeach;?>
-      
+
     <tr class="repeater-add-wrapper">
       <td colspan="5"></td>
       <td style="width:1px;">
@@ -65,7 +65,7 @@
   ( function( $ )
   {
     $( '#repeater-<?php echo $this->id ?> .upload-image.button' ).click(
-      function()  
+      function()
       {
         var
         target = $( 'input.upload-image.url.' + $( this ).data( 'target' ), $( this ).parent().parent() ),
@@ -87,7 +87,7 @@
         };
         return false;
       });
-    
+
     $( '#repeater-<?php echo $this->id ?> .repeater-button-remove' )
       .click(
         function()
@@ -102,21 +102,21 @@
     wrapper    = $( '.repeater-content-wrapper', collection ).first().clone( true );
 
     $( 'input.widefat', wrapper ).removeAttr( 'value' );
-    
+
     $( '#repeater-<?php echo $this->id ?>-button-add' )
       .click(
         function()
         {
           i++;
-          
+
           var clone = wrapper.clone( true );
-          
+
           $( 'input.widefat', clone ).each(
             function( n, input )
             {
               $( input ).attr( 'name', '<?php echo $this->id ?>[' + i + '][' + n + ']' );
             });
-            
+
           addTr.before( clone );
         });
   })( jQuery );

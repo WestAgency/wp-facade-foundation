@@ -13,11 +13,11 @@
   <table style="margin-top:10px;width:100%;" class="content-wrapper-collection">
     <tr class="content-wrapper">
       <td style="position: relative;">
-        <input placeholder="Youtube" type="text" name="<?php echo $this->id ?>[0]" value="<?php echo $this->getValue($this->id)[0] ?>" class="widefat" />
+        <input placeholder="Youtube" type="text" name="<?php echo $this->id ?>[0]" value="<?= esc_attr($this->getValue($this->id)[0]) ?>" class="widefat" />
       </td>
 
       <td style="position: relative;">
-        <input placeholder="Bild" type="text" name="<?php echo $this->id ?>[1]" value="<?php echo $this->getValue($this->id)[1] ?>" class="widefat" />
+        <input placeholder="Bild" type="text" name="<?php echo $this->id ?>[1]" value="<?= esc_attr($this->getValue($this->id)[1]) ?>" class="widefat" />
       </td>
     </tr>
   </table>
