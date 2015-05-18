@@ -5,6 +5,6 @@ class Facade_WP_MetaBox_Template_WysiwygEditor
 {
   public function getKeys()
   {
-    return array( $this->id );
+    return [ $this->id ];
   }
 }

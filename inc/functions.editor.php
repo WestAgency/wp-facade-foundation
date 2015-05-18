@@ -22,7 +22,8 @@ add_filter('tiny_mce_before_init', 'init_tiny_mce');
 // Adds buttons
 function init_tiny_mce_buttons($buttons)
 {
-  $buttons = array(
+  $buttons = 
+  [
     'formatselect',
     'separator',
     'bold',
@@ -48,7 +49,8 @@ function init_tiny_mce_buttons($buttons)
     'sup',
     'forecolor',
     'separator',
-    'removeformat');
+    'removeformat'
+  ];
 
   return $buttons;
 }

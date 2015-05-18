@@ -4,6 +4,6 @@ class Facade_WP_MetaBox_Template_RepeaterQuintuple extends Facade_WP_MetaBox_Tem
 {
   public function getKeys()
   {
-    return array( $this->id );
+    return [ $this->id ];
   }
 }

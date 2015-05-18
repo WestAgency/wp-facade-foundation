@@ -3,8 +3,8 @@
 <?php $description = esc_html( $this->description ); ?>
 <?php $values      = $this->getValue( $this->id ); ?>
 
-<?php if( !is_array( $values ) ) $values   = array(); ?>
-<?php if( count( $values ) < 1 ) $values[] = array( '', '' ); ?>
+<?php if( !is_array( $values ) ) $values   = []; ?>
+<?php if( count( $values ) < 1 ) $values[] = [ '', '' ]; ?>
 
 <div id="repeater-<?php echo $this->id ?>">
   <table style="margin-top:10px;width:100%;" class="repeater-content-wrapper-collection">

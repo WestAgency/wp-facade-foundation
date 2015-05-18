@@ -18,9 +18,9 @@ abstract class Facade_WP_Widget_Dashboard
   {
     add_action(
       'wp_dashboard_setup', 
-      array(
+      [
         $this,
-        'addDdashboardWidget' ) );
+        'addDdashboardWidget' ] );
   }
 
   public function addDdashboardWidget()
@@ -28,7 +28,7 @@ abstract class Facade_WP_Widget_Dashboard
     wp_add_dashboard_widget(
       $this->id, 
       $this->name, 
-      array( $this, 'getHtml' ));	
+      [ $this, 'getHtml' ]);	
   }
   
   public function getHtml()

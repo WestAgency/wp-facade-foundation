@@ -3,7 +3,7 @@
 <?php $description = esc_html( $this->description ); ?>
 <?php $values      = $this->getValue( $this->id ); ?>
 
-<?php if( !is_array( $values ) ) $values   = array(); ?>
+<?php if( !is_array( $values ) ) $values   = []; ?>
 <?php if( count( $values ) < 1 ) $values[] = ''; ?>
 
 <div id="repeater-<?php echo $this->id ?>">

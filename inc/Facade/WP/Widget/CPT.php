@@ -13,11 +13,11 @@ class Facade_WP_Widget_CPT extends WP_Widget
     $this->title       = $title;
     $this->description = $description;
 
-    $widget_options = array(
+    $widget_options = [
       'classname'   => $this->cpt . '-widget',
-      'description' => $this->description);
+      'description' => $this->description];
 
-    $control_options = array();
+    $control_options = [];
 
     parent::WP_Widget(
       $this->cpt . 'widget',
@@ -29,9 +29,10 @@ class Facade_WP_Widget_CPT extends WP_Widget
   public function widget($args, $instance)
   {
     $query = new WP_Query(
-      array(
+      [
         'p'         => $instance[$this->cpt],
-        'post_type' => $this->cpt));
+        'post_type' => $this->cpt
+      ]);
 
     if($query->have_posts())
     {
@@ -55,7 +56,7 @@ class Facade_WP_Widget_CPT extends WP_Widget
 
   public function form($instance)
   {
-    $instance = wp_parse_args((array) $instance, array('title' => '', $this->cpt => 0));
+    $instance = wp_parse_args((array) $instance, ['title' => '', $this->cpt => 0]);
     echo '<input class="widefat" id="' . $this->get_field_id('title') . '" name="' . $this->get_field_name('title') . '" type="hidden" value="' . $instance['title'] . '" />'
         .'<p>'
         .'<label for="' . $this->get_field_id($this->cpt) . '">' . __('Välj en post:');

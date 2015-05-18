@@ -12,9 +12,9 @@ class Facade_WP_Walker_NavigationMenu_Description extends Walker_Nav_Menu
    * @param int $depth Depth of menu item. Used for padding.
    * @param object $args
    */
-  function start_el( &$output, $item, $depth = 0, $args = array() )
+  function start_el( &$output, $item, $depth = 0, $args = [] )
   {
-    $classes = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( array( 'cell', 'loose' )), $item, $args ) );
+    $classes = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( [ 'cell', 'loose' ]), $item, $args ) );
     $classes = $classes ? ' class="' . esc_attr( $classes ) . '"' : '';
 
     $output .= '<li' . $classes .'>';

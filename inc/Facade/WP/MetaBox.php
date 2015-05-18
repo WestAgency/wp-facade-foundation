@@ -56,15 +56,17 @@ class Facade_WP_MetaBox
 
     add_action(
       'add_meta_boxes',
-      array(
+      [
         $instance,
-        'addMetaBox' ));
+        'addMetaBox' 
+      ]);
 
     add_action(
       'save_post',
-      array(
+      [
         $instance,
-        'saveMetaBox' ),
+        'saveMetaBox' 
+      ],
       1,
       0);
   }
@@ -97,7 +99,7 @@ class Facade_WP_MetaBox
       add_meta_box(
         $this->id,
         $this->title,
-        array($this->metaTemplate, 'getHtml'),
+        [$this->metaTemplate, 'getHtml'],
         $this->type,
         $this->context,
         $this->priority );

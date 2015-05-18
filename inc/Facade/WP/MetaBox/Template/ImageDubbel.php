@@ -5,9 +5,10 @@ class Facade_WP_MetaBox_Template_ImageDubbel extends Facade_WP_MetaBox_Template
   public function getKeys()
   {
     return
-      array(
+      [
         $this->id . '-thumb', 
         $this->id . '-image', 
-        $this->id . '-alt' );
+        $this->id . '-alt' 
+      ];
   }
 }

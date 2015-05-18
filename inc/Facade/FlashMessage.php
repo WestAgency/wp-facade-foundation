@@ -89,16 +89,16 @@ class Facade_FlashMessage
   protected function _compose( $namespace = '' )
   {
     if( !isset( $_SESSION[ 'FlashMessage' ] ))
-      $_SESSION[ 'FlashMessage' ] = array();
+      $_SESSION[ 'FlashMessage' ] = [];
 
     if( !isset( $_SESSION[ 'FlashMessage' ][ 'ns' ] ))
-      $_SESSION[ 'FlashMessage' ][ 'ns' ] = array();
+      $_SESSION[ 'FlashMessage' ][ 'ns' ] = [];
 
     if( strlen( $namespace ) > 0 )
       if( !isset( $_SESSION[ 'FlashMessage' ][ 'ns' ][ $namespace ] ))
-        $_SESSION[ 'FlashMessage' ][ 'ns' ][ $namespace ] = array();
+        $_SESSION[ 'FlashMessage' ][ 'ns' ][ $namespace ] = [];
 
     if( !isset( $_SESSION[ 'FlashMessage' ][ 'no-ns' ] ))
-      $_SESSION[ 'FlashMessage' ][ 'no-ns' ] = array();
+      $_SESSION[ 'FlashMessage' ][ 'no-ns' ] = [];
   }
 }

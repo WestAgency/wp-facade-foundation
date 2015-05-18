@@ -9,7 +9,7 @@ remove_action('wp_head', 'rsd_link');
 add_theme_support('automatic-feed-links');
 
 // Feutured images
-add_theme_support('post-thumbnails', array('page'));
+add_theme_support('post-thumbnails', ['page']);
 
 // Adding css rules for the text editor in admin panel
 add_editor_style();

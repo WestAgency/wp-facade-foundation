@@ -4,6 +4,6 @@ class Facade_WP_MetaBox_Template_RepeaterTrippel extends Facade_WP_MetaBox_Templ
 {
   public function getKeys()
   {
-    return array( $this->id );
+    return [ $this->id ];
   }
 }

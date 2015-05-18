@@ -33,7 +33,7 @@ class Facade_Request
     return self::$_curHost;
   }
 
-  public static function reload( $params = array(), $exit = true )
+  public static function reload( $params = [], $exit = true )
   {
     $url = self::getCurrentUrl();
     

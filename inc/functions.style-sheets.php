@@ -12,7 +12,7 @@ function init_style_enqueue()
     // Url
     get_template_directory_uri().'/css/bootstrap.min.css',
     // Dependencies
-    array(),
+    [],
     // Version
     '3.3.4',
     // Media
@@ -21,7 +21,7 @@ function init_style_enqueue()
   wp_enqueue_style(
     'master',
     get_template_directory_uri().'/css/master.css',
-    array('bootstrap'),
+    ['bootstrap'],
     '1.0.0',
     'all');
 }

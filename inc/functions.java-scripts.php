@@ -23,7 +23,7 @@ function init_script_enqueue()
   wp_enqueue_script(
     'bootstrap',
     get_template_directory_uri().'/js/bootstrap.min.js',
-    array('jquery'),
+    ['jquery'],
     '3.3.4',
     true);
 }

@@ -8,21 +8,21 @@ abstract class Facade_Form implements Facade_Form_Interface
     *
     * @var Array
     */
-    $_rules = array(),
+    $_rules = [],
 
    /**
     * What keys to filter
     *
     * @var Array
     */
-    $_filter = array(),
+    $_filter = [],
 
    /**
     * Validation rules
     *
     * @var Array
     */
-    $_data = array();
+    $_data = [];
 
   /**
    * All errors will be saved to session in a flash message before reloding url.
@@ -49,7 +49,7 @@ abstract class Facade_Form implements Facade_Form_Interface
       if( isset( $this->_filter[ $key ] ))
       {
         if( !is_array( $this->_filter[ $key ] ) )
-          $this->_filter[ $key ] = array( $this->_filter[ $key ] );
+          $this->_filter[ $key ] = [ $this->_filter[ $key ] ];
 
         foreach( $this->_filter[ $key ] as $filter )
         {
@@ -83,7 +83,7 @@ abstract class Facade_Form implements Facade_Form_Interface
     foreach( $this->_rules as $key => $rules )
     {
       if( !is_array( $rules ) )
-        $rules = array( $rules );
+        $rules = [ $rules ];
 
       foreach( $rules as $rule )
       {
