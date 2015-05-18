@@ -110,7 +110,8 @@ class Facade_WP_MetaBox
     global $post;
 
     // Verify noncename
-    if ( !wp_verify_nonce( $_POST[ 'noncename-' . $this->id ], $this->id ))
+    if(!isset($_POST[ 'noncename-' . $this->id ]) 
+    || !wp_verify_nonce( $_POST[ 'noncename-' . $this->id ], $this->id ))
       return $post->ID;
 
     // Authorized?
