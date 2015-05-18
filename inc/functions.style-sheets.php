@@ -3,7 +3,8 @@
 // Enqueue style sheets
 function init_style_enqueue()
 {
-  if(is_admin())
+  if(in_array( $GLOBALS['pagenow'], ['wp-login.php', 'wp-register.php']) 
+  || is_admin())
     return;
 
   wp_enqueue_style(

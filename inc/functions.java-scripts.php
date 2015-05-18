@@ -4,7 +4,14 @@
 function init_script_enqueue()
 {
   if(is_admin())
+  {
+    wp_enqueue_script('thickbox');
     return;
+  }
+  elseif(in_array( $GLOBALS['pagenow'], ['wp-login.php', 'wp-register.php']))
+  {
+    return;
+  }
 
   wp_deregister_script('jquery');
 
