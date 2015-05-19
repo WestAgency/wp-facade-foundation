@@ -4,7 +4,7 @@
 
 <?php if( $description <> '' ) : ?>
   <p>
-    <?php echo $description; ?>
+    <?= $description; ?>
   </p>
 <?php endif;?>
 
@@ -13,17 +13,17 @@
 <script type="text/javascript">
   ( function( $ )
   {
-    $( '#<?php echo $this->id ?>' )
+    $( '#<?= $this->id ?>' )
       .css( 'display', 'none' );
 
     $( '#post-body-content' ).append( 
-      $( '#wp-<?php echo $this->id ?>-wrap' )
+      $( '#wp-<?= $this->id ?>-wrap' )
         .css( 'margin-bottom', '20px' ) );
 
     $( document ).ready(
       function()
       {
-        $( '#adv-settings label[for="<?php echo $this->id ?>-hide"]' )
+        $( '#adv-settings label[for="<?= $this->id ?>-hide"]' )
           .css( 'display', 'none' );
       });
   })( jQuery );

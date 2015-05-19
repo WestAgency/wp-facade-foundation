@@ -6,13 +6,13 @@
 <?php if( !is_array( $values ) ) $values   = []; ?>
 <?php if( count( $values ) < 1 ) $values[] = ''; ?>
 
-<div id="repeater-<?php echo $this->id ?>">
+<div id="repeater-<?= $this->id ?>">
   <table style="margin-top:10px;width:100%;" class="repeater-content-wrapper-collection">
     <?php if( $description <> '' ) : ?>
       <tr>
         <td colspan="2">
           <p style="margin: 0 0 7px 0;">
-            <?php echo $description; ?>
+            <?= $description; ?>
           </p>
         </td>
       </tr>
@@ -22,7 +22,7 @@
       <tr class="repeater-content-wrapper">
         <td>
           <div style="margin-right:5px;margin-bottom:10px;">
-            <input type="text" name="<?php echo $this->id ?>[]" value="<?php echo esc_attr($value) ?>" class="widefat" />
+            <input type="text" name="<?= $this->id ?>[]" value="<?= esc_attr($value) ?>" class="widefat" />
           </div>
         </td>
 
@@ -35,7 +35,7 @@
     <tr class="repeater-add-wrapper">
       <td></td>
       <td style="width:1px;">
-        <input style="float:right;" id="repeater-<?php echo $this->id ?>-button-add" type="button" class="button-primary" value="+" />
+        <input style="float:right;" id="repeater-<?= $this->id ?>-button-add" type="button" class="button-primary" value="+" />
       </td>
     </tr>
   </table>
@@ -44,7 +44,7 @@
 <script type="text/javascript">
   ( function( $ )
   {
-    $( '#repeater-<?php echo $this->id ?> .repeater-button-remove' )
+    $( '#repeater-<?= $this->id ?> .repeater-button-remove' )
       .click(
         function()
         {
@@ -52,13 +52,13 @@
         });
 
     var
-    collection = $( '#repeater-<?php echo $this->id ?> .repeater-content-wrapper-collection' ),
+    collection = $( '#repeater-<?= $this->id ?> .repeater-content-wrapper-collection' ),
     addTr      = $( '.repeater-add-wrapper', collection ),
     wrapper    = $( '.repeater-content-wrapper', collection ).first().clone( true );
 
     $( 'input.widefat', wrapper ).removeAttr( 'value' );
 
-    $( '#repeater-<?php echo $this->id ?>-button-add' )
+    $( '#repeater-<?= $this->id ?>-button-add' )
       .click(
         function()
         {

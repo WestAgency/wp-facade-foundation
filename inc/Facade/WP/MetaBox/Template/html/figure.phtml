@@ -2,13 +2,13 @@
 
 <?php $description = esc_html( $this->description ); ?>
 
-<div id="dubbel-image-<?php echo $this->id ?>">
+<div id="dubbel-image-<?= $this->id ?>">
   <table style="margin-top:10px;width:100%;" class="content-wrapper-collection">
     <?php if( $description <> '' ) : ?>
       <tr>
         <td colspan="5">
           <p style="margin: 0 0 7px 0;">
-            <?php echo $description; ?>
+            <?= $description; ?>
           </p>
         </td>
       </tr>
@@ -17,7 +17,7 @@
     <tr class="content-wrapper">
       <td style="position: relative;">
         <div style="margin-right:5px;margin-bottom:10px;">
-          <input placeholder="<?php _e( 'Image' ) ?>" class="upload-image url widefat image" type="text" value="<?php echo esc_attr($this->getValue( $this->id . '-image' )) ?>" name="<?php echo $this->id . '-image' ?>" />
+          <input placeholder="<?php _e( 'Image' ) ?>" class="upload-image url widefat image" type="text" value="<?= esc_attr($this->getValue( $this->id . '-image' )) ?>" name="<?= $this->id . '-image' ?>" />
         </div>
       </td>
 
@@ -27,13 +27,13 @@
 
       <td>
         <div style="margin-right:5px;margin-bottom:10px;">
-          <input placeholder="<?php _e( 'Alternative text' ) ?>" class="upload-image alt widefat" type="text" value="<?php echo esc_attr($this->getValue( $this->id . '-alt' )) ?>" name="<?php echo $this->id . '-alt' ?>" />
+          <input placeholder="<?php _e( 'Alternative text' ) ?>" class="upload-image alt widefat" type="text" value="<?= esc_attr($this->getValue( $this->id . '-alt' )) ?>" name="<?= $this->id . '-alt' ?>" />
         </div>
       </td>
 
       <td>
         <div style="margin-right:5px;margin-bottom:10px;">
-          <input placeholder="<?php _e( 'Caption' ) ?>" class="upload-image alt widefat" type="text" value="<?php echo esc_attr($this->getValue( $this->id . '-caption' )) ?>" name="<?php echo $this->id . '-caption' ?>" />
+          <input placeholder="<?php _e( 'Caption' ) ?>" class="upload-image alt widefat" type="text" value="<?= esc_attr($this->getValue( $this->id . '-caption' )) ?>" name="<?= $this->id . '-caption' ?>" />
         </div>
       </td>
     </tr>
@@ -43,7 +43,7 @@
 <script type="text/javascript">
   ( function( $ )
   {
-    $( '#dubbel-image-<?php echo $this->id ?> .upload-image.button' ).click(
+    $( '#dubbel-image-<?= $this->id ?> .upload-image.button' ).click(
       function()
       {
         var

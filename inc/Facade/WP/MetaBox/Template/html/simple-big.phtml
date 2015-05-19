@@ -4,8 +4,8 @@
 
 <?php if( $description <> '' ) : ?>
   <p style="margin-bottom:5px;">
-    <?php echo $description; ?>
+    <?= $description; ?>
   </p>
 <?php endif;?>
 
-<input style="font-size:1.7em;" type="text" name="<?php echo $this->id ?>" value="<?php echo esc_attr($this->getValue( $this->id )) ?>" class="widefat" />
+<input style="font-size:1.7em;" type="text" name="<?= $this->id ?>" value="<?= esc_attr($this->getValue( $this->id )) ?>" class="widefat" />

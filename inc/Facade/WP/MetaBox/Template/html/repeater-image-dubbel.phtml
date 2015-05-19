@@ -6,13 +6,13 @@
 <?php if( !is_array( $values ) ) $values   = []; ?>
 <?php if( count( $values ) < 1 ) $values[] = ''; ?>
 
-<div id="repeater-<?php echo $this->id ?>">
+<div id="repeater-<?= $this->id ?>">
   <table style="margin-top:10px;width:100%;" class="repeater-content-wrapper-collection">
     <?php if( $description <> '' ) : ?>
       <tr>
         <td colspan="6">
           <p style="margin: 0 0 7px 0;">
-            <?php echo $description; ?>
+            <?= $description; ?>
           </p>
         </td>
       </tr>
@@ -22,7 +22,7 @@
       <tr class="repeater-content-wrapper">
         <td style="position: relative;">
           <div style="margin-right:5px;margin-bottom:10px;">
-            <input placeholder="<?php _e( 'Thumb' ) ?>" class="upload-image url widefat thumb" type="text"   value="<?php echo esc_attr($value[ 0 ]) ?>" name="<?php echo $this->id ?>[<?php echo $i ?>][0]" />
+            <input placeholder="<?php _e( 'Thumb' ) ?>" class="upload-image url widefat thumb" type="text"   value="<?= esc_attr($value[ 0 ]) ?>" name="<?= $this->id ?>[<?= $i ?>][0]" />
           </div>
         </td>
 
@@ -32,7 +32,7 @@
 
         <td style="position: relative;">
           <div style="margin-right:5px;margin-bottom:10px;">
-            <input placeholder="<?php _e( 'Image' ) ?>" class="upload-image url widefat image" type="text"   value="<?php echo esc_attr($value[ 1 ]) ?>" name="<?php echo $this->id ?>[<?php echo $i ?>][1]" />
+            <input placeholder="<?php _e( 'Image' ) ?>" class="upload-image url widefat image" type="text"   value="<?= esc_attr($value[ 1 ]) ?>" name="<?= $this->id ?>[<?= $i ?>][1]" />
           </div>
         </td>
 
@@ -42,7 +42,7 @@
 
         <td>
           <div style="margin-right:5px;margin-bottom:10px;">
-            <input placeholder="<?php _e( 'Alternative text' ) ?>" class="upload-image alt widefat" type="text"   value="<?php echo esc_attr($value[ 2 ]) ?>" name="<?php echo $this->id ?>[<?php echo $i ?>][2]" />
+            <input placeholder="<?php _e( 'Alternative text' ) ?>" class="upload-image alt widefat" type="text"   value="<?= esc_attr($value[ 2 ]) ?>" name="<?= $this->id ?>[<?= $i ?>][2]" />
           </div>
         </td>
 
@@ -55,7 +55,7 @@
     <tr class="repeater-add-wrapper">
       <td colspan="5"></td>
       <td style="width:1px;">
-        <input style="float:right;" id="repeater-<?php echo $this->id ?>-button-add" type="button" class="button-primary" value="+" />
+        <input style="float:right;" id="repeater-<?= $this->id ?>-button-add" type="button" class="button-primary" value="+" />
       </td>
     </tr>
   </table>
@@ -64,7 +64,7 @@
 <script type="text/javascript">
   ( function( $ )
   {
-    $( '#repeater-<?php echo $this->id ?> .upload-image.button' ).click(
+    $( '#repeater-<?= $this->id ?> .upload-image.button' ).click(
       function()
       {
         var
@@ -88,7 +88,7 @@
         return false;
       });
 
-    $( '#repeater-<?php echo $this->id ?> .repeater-button-remove' )
+    $( '#repeater-<?= $this->id ?> .repeater-button-remove' )
       .click(
         function()
         {
@@ -96,14 +96,14 @@
         });
 
     var
-    i          = <?php echo $i ?>,
-    collection = $( '#repeater-<?php echo $this->id ?> .repeater-content-wrapper-collection' ),
+    i          = <?= $i ?>,
+    collection = $( '#repeater-<?= $this->id ?> .repeater-content-wrapper-collection' ),
     addTr      = $( '.repeater-add-wrapper', collection ),
     wrapper    = $( '.repeater-content-wrapper', collection ).first().clone( true );
 
     $( 'input.widefat', wrapper ).removeAttr( 'value' );
 
-    $( '#repeater-<?php echo $this->id ?>-button-add' )
+    $( '#repeater-<?= $this->id ?>-button-add' )
       .click(
         function()
         {
@@ -114,7 +114,7 @@
           $( 'input.widefat', clone ).each(
             function( n, input )
             {
-              $( input ).attr( 'name', '<?php echo $this->id ?>[' + i + '][' + n + ']' );
+              $( input ).attr( 'name', '<?= $this->id ?>[' + i + '][' + n + ']' );
             });
 
           addTr.before( clone );

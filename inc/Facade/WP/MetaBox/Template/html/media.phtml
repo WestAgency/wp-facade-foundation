@@ -2,13 +2,13 @@
 
 <?php $description = esc_html( $this->description ); ?>
 
-<div id="media-<?php echo $this->id ?>">
+<div id="media-<?= $this->id ?>">
   <table style="margin-top:10px;width:100%;" class="content-wrapper-collection">
     <?php if( $description <> '' ) : ?>
       <tr>
         <td colspan="5">
           <p style="margin: 0 0 7px 0;">
-            <?php echo $description; ?>
+            <?= $description; ?>
           </p>
         </td>
       </tr>
@@ -17,7 +17,7 @@
     <tr class="content-wrapper">
       <td style="position: relative;">
         <div style="margin-right:5px;margin-bottom:10px;">
-          <input placeholder="<?php _e( 'Media' ) ?>" class="upload-media url widefat media" type="text" value="<?php echo esc_attr($this->getValue( $this->id )) ?>" name="<?php echo $this->id ?>" />
+          <input placeholder="<?php _e( 'Media' ) ?>" class="upload-media url widefat media" type="text" value="<?= esc_attr($this->getValue( $this->id )) ?>" name="<?= $this->id ?>" />
         </div>
       </td>
 
@@ -31,7 +31,7 @@
 <script type="text/javascript">
   ( function( $ )
   {
-    $( '#media-<?php echo $this->id ?> .upload-media.button' ).click(
+    $( '#media-<?= $this->id ?> .upload-media.button' ).click(
       function()
       {
         var

@@ -4,8 +4,8 @@
 
 <?php if( $description <> '' ) : ?>
   <p style="margin-bottom:5px;">
-    <?php echo $description; ?>
+    <?= $description; ?>
   </p>
 <?php endif;?>
 
-<input style="width: 100px; height: 50px;" type="color" name="<?php echo $this->id ?>" value="<?php echo $this->getValue( $this->id ) ?>" />
+<input style="width: 100px; height: 50px;" type="color" name="<?= $this->id ?>" value="<?= $this->getValue( $this->id ) ?>" />

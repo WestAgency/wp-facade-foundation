@@ -4,7 +4,7 @@
 
 <?php if( $description <> '' ) : ?>
   <p style="margin-bottom:5px;">
-    <?php echo $description; ?>
+    <?= $description; ?>
   </p>
 <?php endif ?>
 
@@ -36,12 +36,12 @@
 
 ?>
 
-<select name="<?php echo $this->id ?>">
+<select name="<?= $this->id ?>">
   <?php foreach ($composed as $cpt => $posts): ?>
-    <optgroup label="<?php echo $cpt ?>">
+    <optgroup label="<?= $cpt ?>">
       <?php foreach ($posts as $post): ?>
-        <option value="<?php echo $post->ID ?>"<?php echo $this->getValue( $this->id ) == $post->ID ? ' selected' : '' ?>>
-          <?php echo $post->post_title ?>
+        <option value="<?= $post->ID ?>"<?= $this->getValue( $this->id ) == $post->ID ? ' selected' : '' ?>>
+          <?= $post->post_title ?>
         </option>
       <?php endforeach ?>
     </optgroup>
